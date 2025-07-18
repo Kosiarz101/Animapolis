@@ -1,6 +1,7 @@
 package com.animapolis.employee.repository;
 
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Repository;
 @RequiredArgsConstructor
 public class EntityManagerRepositoryImpl implements EntityManagerRepository {
 
+    @PersistenceContext
     private final EntityManager entityManager;
 
     @Override

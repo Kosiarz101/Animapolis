@@ -1,7 +1,9 @@
 package com.animapolis.employee.model.dto.request;
 
-import com.animapolis.employee.model.entity.EmploymentContract;
-import jakarta.validation.constraints.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Past;
+import jakarta.validation.constraints.Pattern;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -22,12 +24,10 @@ public class EmployeeRequestDto extends DtoRequestBase {
     @Pattern(regexp = "\\d{11}", message = "PESEL must contain 11 digits")
     private String pesel;
 
-    @NotNull(message = "Birthdate birthdate must be provided")
+    @NotNull(message = "Birthdate must be provided")
     @Past(message = "Birthdate must be in the past")
     private LocalDate birthdate;
 
     @Pattern(regexp = "^\\d{1,15}$", message = "Phone number cannot be longer than 15 digits and must contain only digits")
     private String phoneNumber;
-
-    private EmploymentContract employmentContract;
 }
