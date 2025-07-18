@@ -5,7 +5,7 @@ plugins {
 }
 
 group = 'com.animapolis'
-version = '0.0.1-SNAPSHOT'
+version = '0.0.1'
 
 java {
 	toolchain {
@@ -20,6 +20,12 @@ compileJava {
 			'-Amapstruct.verbose=true',
 			'-Amapstruct.defaultComponentModel=spring'
 	]
+}
+
+jar {
+	archiveBaseName.set('employee')
+	archiveVersion.set(version)
+	archiveClassifier.set('')
 }
 
 configurations {
