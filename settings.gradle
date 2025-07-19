@@ -1,2 +1,3 @@
 rootProject.name = 'animapolis'
-include('employee')
+include 'employee'
+include 'healthcare'
