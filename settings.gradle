@@ -1,3 +1,4 @@
 rootProject.name = 'animapolis'
 include 'employee'
 include 'healthcare'
+include 'configserver'

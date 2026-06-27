@@ -1,0 +1,15 @@
+services:
+  employee:
+    image: animapolis/employee
+    ports:
+      - "8011:8011"
+    networks:
+      - animapolis-network
+  healthcare:
+    image: animapolis/healthcare
+    ports:
+      - "8012:8012"
+    networks:
+      - animapolis-network
+networks:
+  animapolis-network:
