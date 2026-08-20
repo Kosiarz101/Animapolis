@@ -1,0 +1,12 @@
+services:
+  base_all:
+    networks:
+      - animapolis_network
+
+  base_service:
+    extends:
+      file: docker-compose.base.yml
+      service: base_all
+    depends_on:
+      config:
+        condition: service_healthy
