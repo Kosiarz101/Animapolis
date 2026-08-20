@@ -7,7 +7,6 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(indexes = @Index(columnList = "resourceId"))
 public class MedicationPrescription extends EntityBase {
 
     @Id

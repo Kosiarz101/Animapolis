@@ -9,7 +9,6 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @Entity
-@Table(indexes = @Index(columnList = "resourceId"))
 public class MedicationAdministration extends EntityBase {
 
     @Id

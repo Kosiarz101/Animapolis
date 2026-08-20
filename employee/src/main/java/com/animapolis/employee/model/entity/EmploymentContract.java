@@ -10,7 +10,6 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @Entity
-@Table(indexes = @Index(columnList = "resourceId"))
 public class EmploymentContract extends EntityBase {
 
     @Id

@@ -10,7 +10,6 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
-@Table(indexes = @Index(columnList = "resourceId"))
 public class Prescription extends EntityBase {
 
     @Id
