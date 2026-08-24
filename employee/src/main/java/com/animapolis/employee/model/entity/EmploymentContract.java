@@ -28,7 +28,7 @@ public class EmploymentContract extends EntityBase {
 
     private LocalDate employmentEndDate;
 
-    @OneToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "employee_id", referencedColumnName = "id", nullable = false)
     private Employee employee;
 }

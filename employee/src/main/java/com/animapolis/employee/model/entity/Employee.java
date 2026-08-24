@@ -29,7 +29,4 @@ public class Employee extends EntityBase {
 
     @Column(length = 15)
     private String phoneNumber;
-
-    @OneToOne(mappedBy = "employee", cascade = CascadeType.REMOVE)
-    private EmploymentContract contract;
 }

@@ -57,7 +57,7 @@ public class DefaultEmploymentContractService extends BaseEntityService implemen
 
     @Override
     public List<EmploymentContractResponseDto> getAll() {
-        List<EmploymentContract> employmentContracts = employmentContractRepository.findAll();
+        List<EmploymentContract> employmentContracts = employmentContractRepository.findAllWithEmployees();
 
         return employmentContracts.stream()
                 .map(employmentContractMapper::toDto)
