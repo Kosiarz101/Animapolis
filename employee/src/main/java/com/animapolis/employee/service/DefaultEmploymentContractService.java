@@ -9,15 +9,16 @@ import com.animapolis.employee.model.entity.Employee;
 import com.animapolis.employee.model.entity.EmploymentContract;
 import com.animapolis.employee.repository.EmployeeRepository;
 import com.animapolis.employee.repository.EmploymentContractRepository;
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class DefaultEmploymentContractService extends BaseEntityService implements EmploymentContractService {
 
     private final EmploymentContractRepository employmentContractRepository;

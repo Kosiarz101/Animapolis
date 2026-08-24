@@ -24,6 +24,4 @@ public interface EmploymentContractRepository extends JpaRepository<EmploymentCo
     Optional<Long> findByEmployeeId(@Param("employeeId") Long employeeId);
 
     boolean existsByEmployeeId(Long employeeId);
-
-    void deleteByResourceId(String resourceId);
 }

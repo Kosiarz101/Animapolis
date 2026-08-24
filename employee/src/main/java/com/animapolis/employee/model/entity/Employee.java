@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Getter
 @Setter
@@ -29,4 +30,7 @@ public class Employee extends EntityBase {
 
     @Column(length = 15)
     private String phoneNumber;
+
+    @OneToMany(mappedBy = "employee", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    private List<EmploymentContract> employmentContracts;
 }

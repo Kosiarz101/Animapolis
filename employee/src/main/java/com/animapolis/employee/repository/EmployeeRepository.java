@@ -15,6 +15,4 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long>, Entit
 
     @Query("SELECT employee.id FROM Employee employee WHERE employee.resourceId = :resourceId")
     Optional<Long> findIdByResourceId(@Param("resourceId") String resourceId);
-
-    void deleteByResourceId(String resourceId);
 }

@@ -6,14 +6,15 @@ import com.animapolis.employee.model.dto.request.EmployeeRequestDto;
 import com.animapolis.employee.model.dto.response.EmployeeResponseDto;
 import com.animapolis.employee.model.entity.Employee;
 import com.animapolis.employee.repository.EmployeeRepository;
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class DefaultEmployeeService extends BaseEntityService implements EmployeeService {
 
     private final EmployeeRepository employeeRepository;
