@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @MappedSuperclass
 @Getter
@@ -13,7 +14,7 @@ import java.time.LocalDateTime;
 public class EntityBase {
 
     @Column(unique = true, nullable = false)
-    private String resourceId;
+    private UUID resourceId;
 
     @Column(updatable = false, nullable = false)
     private LocalDateTime creationDate;

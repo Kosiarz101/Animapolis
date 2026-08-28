@@ -27,9 +27,9 @@ public class Medication extends EntityBase {
     @Column(nullable = false)
     private LocalDateTime expirationDate;
 
-    @OneToMany(mappedBy = "medication", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "medication", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     private List<MedicationPrescription> medicationPrescriptions;
 
-    @OneToMany(mappedBy = "medication", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "medication", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     private List<MedicationAdministration> medicationAdministrations;
 }

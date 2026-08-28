@@ -21,11 +21,11 @@ public class MedicationPrescription extends EntityBase {
 
     private String dosageInstruction;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "prescription_id", referencedColumnName = "id", nullable = false)
     private Prescription prescription;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "medication_id", referencedColumnName = "id", nullable = false)
     private Medication medication;
 }

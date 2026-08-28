@@ -1,4 +1,4 @@
-package com.animapolis.healthcare.service;
+package com.animapolis.healthcare.service.medication;
 
 import com.animapolis.healthcare.model.dto.request.MedicationPrescriptionRequestDto;
 import com.animapolis.healthcare.model.dto.response.MedicationPrescriptionResponseDto;

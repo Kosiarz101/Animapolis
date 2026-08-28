@@ -5,7 +5,7 @@ import lombok.RequiredArgsConstructor;
 import com.animapolis.healthcare.exception.ValidationException;
 import com.animapolis.healthcare.model.dto.request.MedicationPrescriptionRequestDto;
 import com.animapolis.healthcare.model.dto.response.MedicationPrescriptionResponseDto;
-import com.animapolis.healthcare.service.MedicationPrescriptionService;
+import com.animapolis.healthcare.service.medication.MedicationPrescriptionService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

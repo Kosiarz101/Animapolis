@@ -1,4 +1,4 @@
-package com.animapolis.healthcare.service;
+package com.animapolis.healthcare.service.medication;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;

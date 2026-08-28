@@ -1,4 +1,4 @@
-package com.animapolis.healthcare.service;
+package com.animapolis.healthcare.service.medication;
 
 import com.animapolis.healthcare.model.entity.EntityBase;
 
@@ -11,7 +11,7 @@ public abstract class BaseEntityService {
         LocalDateTime now = LocalDateTime.now();
         entityBase.setCreationDate(now);
         entityBase.setLastUpdatedDate(now);
-        entityBase.setResourceId(UUID.randomUUID().toString());
+        entityBase.setResourceId(UUID.randomUUID());
     }
 
     public void prepareForUpdate(EntityBase entityBase) {

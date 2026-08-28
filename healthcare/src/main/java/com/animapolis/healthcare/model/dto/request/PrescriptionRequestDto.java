@@ -6,12 +6,19 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Getter
 @Setter
 public class PrescriptionRequestDto extends DtoRequestBase {
 
     private String resourceId;
+
+    @NotNull(message = "Author identifier must be provided")
+    private UUID authorResourceId;
+
+    @NotNull(message = "Animal identifier must be provided")
+    private UUID animalResourceId;
 
     @NotBlank(message = "Name must be provided")
     private String name;
@@ -21,7 +28,6 @@ public class PrescriptionRequestDto extends DtoRequestBase {
     @NotNull(message = "Prescription must contain information whether it was completed")
     private boolean isCompleted;
 
+    @NotNull(message = "Authored date must be provided")
     private LocalDateTime authoredDate;
-
-    private String animalResourceId;
 }

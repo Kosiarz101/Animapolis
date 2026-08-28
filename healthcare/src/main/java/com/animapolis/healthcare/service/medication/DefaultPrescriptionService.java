@@ -1,13 +1,14 @@
-package com.animapolis.healthcare.service;
+package com.animapolis.healthcare.service.medication;
 
-import jakarta.transaction.Transactional;
-import lombok.RequiredArgsConstructor;
 import com.animapolis.healthcare.exception.ResourceNotFoundException;
 import com.animapolis.healthcare.mapper.PrescriptionMapper;
 import com.animapolis.healthcare.model.dto.request.PrescriptionRequestDto;
 import com.animapolis.healthcare.model.dto.response.PrescriptionResponseDto;
 import com.animapolis.healthcare.model.entity.Prescription;
 import com.animapolis.healthcare.repository.PrescriptionRepository;
+import com.animapolis.healthcare.service.employee.EmployeeService;
+import jakarta.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,6 +19,7 @@ public class DefaultPrescriptionService extends BaseEntityService implements Pre
 
     private final PrescriptionMapper prescriptionMapper;
     private final PrescriptionRepository prescriptionRepository;
+    private final EmployeeService employeeService;
 
     @Transactional
     @Override
@@ -25,9 +27,14 @@ public class DefaultPrescriptionService extends BaseEntityService implements Pre
         Prescription prescription = prescriptionMapper.toEntity(prescriptionRequestDto);
 
         super.prepareForCreation(prescription);
+
+        if (!employeeService.exists(prescriptionRequestDto.getAuthorResourceId())) {
+            throw new ResourceNotFoundException(
+                    "Author with id = " + prescriptionRequestDto.getAuthorResourceId() + " does not exist");
+        }
+
         prescriptionRepository.save(prescription);
         prescriptionRepository.refresh(prescription);
-        prescription = prescriptionRepository.findById(prescription.getId()).get();
 
         return prescriptionMapper.toDto(prescription);
     }

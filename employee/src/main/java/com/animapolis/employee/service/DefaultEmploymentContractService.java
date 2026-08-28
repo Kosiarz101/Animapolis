@@ -90,7 +90,6 @@ public class DefaultEmploymentContractService extends BaseEntityService implemen
 
         employmentContract = employmentContractRepository.saveAndFlush(employmentContract);
         employmentContractRepository.refresh(employmentContract);
-        employmentContract = employmentContractRepository.findById(employmentContract.getId()).get();
         return employmentContractMapper.toDto(employmentContract);
     }
 
