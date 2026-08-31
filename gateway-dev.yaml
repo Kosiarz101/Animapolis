@@ -2,4 +2,4 @@
 management:
   endpoint:
     gateway:
-      access: read_only
+      access: unrestricted
