@@ -40,3 +40,9 @@ spring:
                 - Path=/employee/employee/**
               filters:
                 - StripPrefix=1
+            - id: employment-contract
+              uri: lb://EMPLOYEE
+              predicates:
+                - Path=/employee/employment-contract/**
+              filters:
+                - StripPrefix=1
