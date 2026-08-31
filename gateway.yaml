@@ -26,6 +26,10 @@ eureka:
 # Spring
 spring:
   cloud:
+    stream:
+      kafka:
+        binder:
+          brokers: localhost:9092
     gateway:
       server:
         webflux:
