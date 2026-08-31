@@ -27,10 +27,12 @@ eureka:
 spring:
   cloud:
     gateway:
-      routes:
-        - id: employee
-          uri: lb://EMPLOYEE
-          predicates:
-            - Path=/employee/employee/**
-          filters:
-            - StripPrefix=1
+      server:
+        webflux:
+          routes:
+            - id: employee
+              uri: lb://EMPLOYEE
+              predicates:
+                - Path=/employee/employee/**
+              filters:
+                - StripPrefix=1
