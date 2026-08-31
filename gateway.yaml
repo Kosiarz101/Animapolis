@@ -1,0 +1,33 @@
+# Spring
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+# Server
+server:
+  port: 8098
+
+# Eureka
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+    register-with-eureka: true
+    fetch-registry: true
+    registry-fetch-interval-seconds: 30
+  instance:
+    prefer-ip-address: true
+
+# Spring
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: employee
+          uri: lb://EMPLOYEE
+          predicates:
+            - Path=/employee/employee/**
+          filters:
+            - StripPrefix=1
