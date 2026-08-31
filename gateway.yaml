@@ -4,6 +4,9 @@ management:
     web:
       exposure:
         include: "*"
+  endpoint:
+    gateway:
+      access: read_only
 
 # Server
 server:
