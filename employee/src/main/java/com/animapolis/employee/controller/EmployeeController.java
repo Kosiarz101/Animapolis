@@ -19,7 +19,7 @@ import java.util.Objects;
         description = "REST API for Employees in Animapolis"
 )
 @RestController
-@RequestMapping(path = "/Employee")
+@RequestMapping(path = "/employee")
 @RequiredArgsConstructor
 public class EmployeeController {
 

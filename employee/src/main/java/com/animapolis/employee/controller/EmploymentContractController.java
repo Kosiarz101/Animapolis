@@ -20,7 +20,7 @@ import java.util.Objects;
         description = "REST API for employment contracts in Animapolis"
 )
 @RestController
-@RequestMapping("EmploymentContract")
+@RequestMapping("employment-contract")
 @RequiredArgsConstructor
 public class EmploymentContractController {
 
