@@ -13,7 +13,7 @@ import java.util.UUID;
 
 @Component
 @Order(Ordered.HIGHEST_PRECEDENCE)
-public class CorrelationIdRequestFilter implements GlobalFilter {
+public class CorrelationIdFilter implements GlobalFilter {
 
     private final String CORRELATION_ID_HEADER = "X-Correlation-Id";
 
