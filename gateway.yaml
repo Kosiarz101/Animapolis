@@ -20,6 +20,8 @@ eureka:
     register-with-eureka: true
     fetch-registry: true
     registry-fetch-interval-seconds: 30
+    refresh:
+      enable: false
   instance:
     prefer-ip-address: true
 
