@@ -34,7 +34,7 @@ spring:
       server:
         webflux:
           routes:
-            - id: employee
+            - id: employee-employee
               uri: lb://EMPLOYEE
               predicates:
                 - Path=/employee/employee/**
@@ -46,9 +46,9 @@ spring:
                 - Path=/employee/employment-contract/**
               filters:
                 - StripPrefix=1
-            - id: healthcare
+            - id: healthcare-prescription
               uri: lb://HEALTHCARE
               predicates:
-                - Path=/healthcare/prescription
+                - Path=/healthcare/prescription/**
               filters:
                 - StripPrefix=1
