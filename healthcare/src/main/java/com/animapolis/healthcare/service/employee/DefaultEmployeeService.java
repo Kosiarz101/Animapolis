@@ -23,15 +23,15 @@ public class DefaultEmployeeService implements EmployeeService {
     public boolean exists(UUID employeeResourceId) {
         try {
             return restClient.get()
-                    .uri("/Employee/" + employeeResourceId)
+                    .uri("/employee/" + employeeResourceId)
                     .retrieve()
                     .onStatus(HttpStatusCode::isError, (request, response) ->
-                            logger.warn("Employee service returned status: {}", response.getStatusCode()))
+                            logger.warn("GET /employee/id returned invalid status: {}", response.getStatusCode()))
                     .toBodilessEntity()
                     .getStatusCode() == HttpStatusCode.valueOf(200);
         } catch (RestClientException ex) {
             logger.error("Error occurred while connecting to employee service: {}", ex.getMessage());
+            throw ex;
         }
-        return false;
     }
 }

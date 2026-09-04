@@ -1,6 +1,7 @@
 package com.animapolis.healthcare.config;
 
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.restclient.autoconfigure.RestClientBuilderConfigurer;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,14 +13,14 @@ public class RestClientConfig {
 
     @Bean
     @Primary
-    public RestClient.Builder defaultRestClientBuilder() {
-        return RestClient.builder();
+    public RestClient.Builder defaultRestClientBuilder(RestClientBuilderConfigurer configurer) {
+        return configurer.configure(RestClient.builder());
     }
 
     @Bean
     @LoadBalanced
-    public RestClient.Builder employeeRestClientBuilder() {
-        return RestClient.builder();
+    public RestClient.Builder employeeRestClientBuilder(RestClientBuilderConfigurer configurer) {
+        return configurer.configure(RestClient.builder());
     }
 
     @Bean
