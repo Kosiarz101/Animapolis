@@ -46,3 +46,9 @@ spring:
                 - Path=/employee/employment-contract/**
               filters:
                 - StripPrefix=1
+            - id: healthcare
+              uri: lb://HEALTHCARE
+              predicates:
+                - Path=/healthcare/prescription
+              filters:
+                - StripPrefix=1
