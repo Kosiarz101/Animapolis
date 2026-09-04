@@ -6,12 +6,13 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Getter
 @Setter
 public class MedicationRequestDto extends DtoRequestBase {
 
-    private String resourceId;
+    private UUID resourceId;
 
     @NotBlank(message = "Name must be provided")
     private String name;

@@ -11,9 +11,10 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.UUID;
 
 @RestController
-@RequestMapping("/Prescription")
+@RequestMapping("/prescription")
 @RequiredArgsConstructor
 public class PrescriptionController {
 
@@ -30,7 +31,7 @@ public class PrescriptionController {
     }
 
     @PutMapping("/{resourceId}")
-    public ResponseEntity<PrescriptionResponseDto> update(@PathVariable("resourceId") String resourceId,
+    public ResponseEntity<PrescriptionResponseDto> update(@PathVariable("resourceId") UUID resourceId,
                                                           @RequestBody @Valid PrescriptionRequestDto prescriptionDto) {
         if (!Objects.equals(resourceId, prescriptionDto.getResourceId())) {
             throw new ValidationException("Path resource id should be equal to id of the resource provided in the request body");
@@ -41,7 +42,7 @@ public class PrescriptionController {
     }
 
     @GetMapping("/{resourceId}")
-    public ResponseEntity<PrescriptionResponseDto> get(@PathVariable("resourceId") String resourceId) {
+    public ResponseEntity<PrescriptionResponseDto> get(@PathVariable("resourceId") UUID resourceId) {
         PrescriptionResponseDto prescription = prescriptionService.get(resourceId);
 
         return ResponseEntity.ok(prescription);
@@ -55,7 +56,7 @@ public class PrescriptionController {
     }
 
     @DeleteMapping("/{resourceId}")
-    public ResponseEntity<Void> delete(@PathVariable("resourceId") String resourceId) {
+    public ResponseEntity<Void> delete(@PathVariable("resourceId") UUID resourceId) {
         prescriptionService.delete(resourceId);
 
         return ResponseEntity

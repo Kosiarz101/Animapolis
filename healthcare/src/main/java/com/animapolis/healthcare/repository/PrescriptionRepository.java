@@ -7,12 +7,13 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
+import java.util.UUID;
 
 @Repository
 public interface PrescriptionRepository extends JpaRepository<Prescription, Long>, EntityManagerRepository {
 
-    Optional<Prescription> findByResourceId(String resourceId);
+    Optional<Prescription> findByResourceId(UUID resourceId);
 
     @Query("SELECT prescription.id FROM Prescription prescription WHERE prescription.resourceId = :resourceId")
-    Optional<Long> findIdByResourceId(@Param("resourceId") String resourceId);
+    Optional<Long> findIdByResourceId(@Param("resourceId") UUID resourceId);
 }

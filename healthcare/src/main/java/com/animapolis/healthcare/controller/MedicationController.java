@@ -1,19 +1,20 @@
 package com.animapolis.healthcare.controller;
 
-import jakarta.validation.Valid;
-import lombok.RequiredArgsConstructor;
 import com.animapolis.healthcare.exception.ValidationException;
 import com.animapolis.healthcare.model.dto.request.MedicationRequestDto;
 import com.animapolis.healthcare.model.dto.response.MedicationResponseDto;
 import com.animapolis.healthcare.service.medication.MedicationService;
+import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.UUID;
 
 @RestController
-@RequestMapping("/Medication")
+@RequestMapping("/medication")
 @RequiredArgsConstructor
 public class MedicationController {
 
@@ -30,7 +31,7 @@ public class MedicationController {
     }
 
     @PutMapping("/{resourceId}")
-    public ResponseEntity<MedicationResponseDto> update(@PathVariable("resourceId") String resourceId,
+    public ResponseEntity<MedicationResponseDto> update(@PathVariable("resourceId") UUID resourceId,
                                                           @RequestBody @Valid MedicationRequestDto medicationDto) {
         if (!Objects.equals(resourceId, medicationDto.getResourceId())) {
             throw new ValidationException("Path resource id should be equal to id of the resource provided in the request body");
@@ -41,7 +42,7 @@ public class MedicationController {
     }
 
     @GetMapping("/{resourceId}")
-    public ResponseEntity<MedicationResponseDto> get(@PathVariable("resourceId") String resourceId) {
+    public ResponseEntity<MedicationResponseDto> get(@PathVariable("resourceId") UUID resourceId) {
         MedicationResponseDto medication = medicationService.get(resourceId);
 
         return ResponseEntity.ok(medication);
@@ -55,7 +56,7 @@ public class MedicationController {
     }
 
     @DeleteMapping("/{resourceId}")
-    public ResponseEntity<Void> delete(@PathVariable("resourceId") String resourceId) {
+    public ResponseEntity<Void> delete(@PathVariable("resourceId") UUID resourceId) {
         medicationService.delete(resourceId);
 
         return ResponseEntity

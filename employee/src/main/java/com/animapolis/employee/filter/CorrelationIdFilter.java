@@ -1,4 +1,4 @@
-package com.animapolis.employee.filters;
+package com.animapolis.employee.filter;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

@@ -1,7 +1,5 @@
 package com.animapolis.healthcare.service.medication;
 
-import jakarta.transaction.Transactional;
-import lombok.RequiredArgsConstructor;
 import com.animapolis.healthcare.exception.ResourceNotFoundException;
 import com.animapolis.healthcare.mapper.MedicationPrescriptionMapper;
 import com.animapolis.healthcare.model.dto.request.MedicationPrescriptionRequestDto;
@@ -10,9 +8,12 @@ import com.animapolis.healthcare.model.entity.MedicationPrescription;
 import com.animapolis.healthcare.repository.MedicationPrescriptionRepository;
 import com.animapolis.healthcare.repository.MedicationRepository;
 import com.animapolis.healthcare.repository.PrescriptionRepository;
+import jakarta.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -49,7 +50,7 @@ public class DefaultMedicationPrescriptionService extends BaseEntityService impl
     }
 
     @Override
-    public MedicationPrescriptionResponseDto get(String resourceId) {
+    public MedicationPrescriptionResponseDto get(UUID resourceId) {
         MedicationPrescription medicationPrescription = medicationPrescriptionRepository
                 .findByResourceId(resourceId)
                 .orElseThrow(
@@ -69,7 +70,7 @@ public class DefaultMedicationPrescriptionService extends BaseEntityService impl
 
     @Transactional
     @Override
-    public MedicationPrescriptionResponseDto update(String resourceId, MedicationPrescriptionRequestDto dto) {
+    public MedicationPrescriptionResponseDto update(UUID resourceId, MedicationPrescriptionRequestDto dto) {
         Long id = medicationPrescriptionRepository.findIdByResourceId(resourceId).orElseThrow(
                 () -> createResourceNotFoundException(resourceId)
         );
@@ -98,18 +99,18 @@ public class DefaultMedicationPrescriptionService extends BaseEntityService impl
     }
 
     @Override
-    public void delete(String resourceId) {
+    public void delete(UUID resourceId) {
         Long id = medicationPrescriptionRepository.findIdByResourceId(resourceId).orElseThrow(
                 () -> createResourceNotFoundException(resourceId)
         );
         medicationPrescriptionRepository.deleteById(id);
     }
 
-    private ResourceNotFoundException createResourceNotFoundException(String resourceId) {
+    private ResourceNotFoundException createResourceNotFoundException(UUID resourceId) {
         return createResourceNotFoundException("MedicationPrescription", resourceId);
     }
 
-    private ResourceNotFoundException createResourceNotFoundException(String resourceType, String resourceId) {
+    private ResourceNotFoundException createResourceNotFoundException(String resourceType, UUID resourceId) {
         return new ResourceNotFoundException(resourceType + " with id = " + resourceId + " does not exist");
     }
 }

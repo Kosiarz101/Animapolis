@@ -5,11 +5,19 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.UUID;
+
 @Getter
 @Setter
 public class MedicationPrescriptionRequestDto extends DtoRequestBase {
 
-    private String resourceId;
+    private UUID resourceId;
+
+    @NotNull(message = "Medication prescription must be connected to medication")
+    private UUID medicationResourceId;
+
+    @NotNull(message = "Medication prescription must be connected to prescription")
+    private UUID prescriptionResourceId;
 
     @NotNull(message = "Dosage value must be provided")
     private Double dosageValue;
@@ -18,10 +26,4 @@ public class MedicationPrescriptionRequestDto extends DtoRequestBase {
     private String dosageUnit;
 
     private String dosageInstruction;
-
-    @NotBlank(message = "Medication prescription must be connected to medication")
-    private String medicationResourceId;
-
-    @NotBlank(message = "Medication prescription must be connected to prescription")
-    private String prescriptionResourceId;
 }

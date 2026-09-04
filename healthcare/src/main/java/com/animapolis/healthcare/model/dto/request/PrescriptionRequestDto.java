@@ -12,7 +12,7 @@ import java.util.UUID;
 @Setter
 public class PrescriptionRequestDto extends DtoRequestBase {
 
-    private String resourceId;
+    private UUID resourceId;
 
     @NotNull(message = "Author identifier must be provided")
     private UUID authorResourceId;

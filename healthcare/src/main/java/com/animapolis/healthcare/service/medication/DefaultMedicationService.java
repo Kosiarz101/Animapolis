@@ -1,16 +1,17 @@
 package com.animapolis.healthcare.service.medication;
 
-import jakarta.transaction.Transactional;
-import lombok.RequiredArgsConstructor;
 import com.animapolis.healthcare.exception.ResourceNotFoundException;
 import com.animapolis.healthcare.mapper.MedicationMapper;
 import com.animapolis.healthcare.model.dto.request.MedicationRequestDto;
 import com.animapolis.healthcare.model.dto.response.MedicationResponseDto;
 import com.animapolis.healthcare.model.entity.Medication;
 import com.animapolis.healthcare.repository.MedicationRepository;
+import jakarta.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -32,7 +33,7 @@ public class DefaultMedicationService extends BaseEntityService implements Medic
     }
 
     @Override
-    public MedicationResponseDto get(String resourceId) {
+    public MedicationResponseDto get(UUID resourceId) {
         Medication medication = medicationRepository.findByResourceId(resourceId).orElseThrow(
                 () -> createResourceNotFoundException(resourceId)
         );
@@ -50,7 +51,7 @@ public class DefaultMedicationService extends BaseEntityService implements Medic
 
     @Transactional
     @Override
-    public MedicationResponseDto update(String resourceId, MedicationRequestDto dto) {
+    public MedicationResponseDto update(UUID resourceId, MedicationRequestDto dto) {
         Long id = medicationRepository.findIdByResourceId(resourceId).orElseThrow(
                 () -> createResourceNotFoundException(resourceId)
         );
@@ -66,14 +67,14 @@ public class DefaultMedicationService extends BaseEntityService implements Medic
 
     @Transactional
     @Override
-    public void delete(String resourceId) {
+    public void delete(UUID resourceId) {
         Long id = medicationRepository.findIdByResourceId(resourceId).orElseThrow(
                 () -> createResourceNotFoundException(resourceId)
         );
         medicationRepository.deleteById(id);
     }
 
-    private ResourceNotFoundException createResourceNotFoundException(String resourceId) {
+    private ResourceNotFoundException createResourceNotFoundException(UUID resourceId) {
         return new ResourceNotFoundException("Medication with id = " + resourceId + " does not exist");
     }
 }

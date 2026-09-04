@@ -6,12 +6,19 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Getter
 @Setter
 public class MedicationAdministrationRequestDto extends DtoRequestBase {
 
-    private String resourceId;
+    private UUID resourceId;
+
+    @NotNull(message = "Medication administration must be connected to medication")
+    private UUID medicationResourceId;
+
+    @NotNull(message = "Medication administration must be connected to prescription")
+    private UUID prescriptionResourceId;
 
     private LocalDateTime administrationDate;
 
@@ -20,10 +27,4 @@ public class MedicationAdministrationRequestDto extends DtoRequestBase {
 
     @NotBlank(message = "Dosage unit must be provided")
     private String dosageUnit;
-
-    @NotBlank(message = "Medication administration must be connected to medication")
-    private String medicationResourceId;
-
-    @NotBlank(message = "Medication administration must be connected to prescription")
-    private String prescriptionResourceId;
 }

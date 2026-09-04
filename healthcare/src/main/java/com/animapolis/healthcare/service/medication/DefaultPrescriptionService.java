@@ -12,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -23,14 +24,14 @@ public class DefaultPrescriptionService extends BaseEntityService implements Pre
 
     @Transactional
     @Override
-    public PrescriptionResponseDto create(PrescriptionRequestDto prescriptionRequestDto) {
-        Prescription prescription = prescriptionMapper.toEntity(prescriptionRequestDto);
+    public PrescriptionResponseDto create(PrescriptionRequestDto dto) {
+        Prescription prescription = prescriptionMapper.toEntity(dto);
 
         super.prepareForCreation(prescription);
 
-        if (!employeeService.exists(prescriptionRequestDto.getAuthorResourceId())) {
+        if (!employeeService.exists(dto.getAuthorResourceId())) {
             throw new ResourceNotFoundException(
-                    "Author with id = " + prescriptionRequestDto.getAuthorResourceId() + " does not exist");
+                    "Author with id = " + dto.getAuthorResourceId() + " does not exist");
         }
 
         prescriptionRepository.save(prescription);
@@ -40,7 +41,7 @@ public class DefaultPrescriptionService extends BaseEntityService implements Pre
     }
 
     @Override
-    public PrescriptionResponseDto get(String resourceId) {
+    public PrescriptionResponseDto get(UUID resourceId) {
         Prescription prescription = prescriptionRepository.findByResourceId(resourceId).orElseThrow(
                 () -> createResourceNotFoundException(resourceId)
         );
@@ -58,7 +59,7 @@ public class DefaultPrescriptionService extends BaseEntityService implements Pre
 
     @Transactional
     @Override
-    public PrescriptionResponseDto update(String resourceId, PrescriptionRequestDto dto) {
+    public PrescriptionResponseDto update(UUID resourceId, PrescriptionRequestDto dto) {
         Long id = prescriptionRepository.findIdByResourceId(resourceId).orElseThrow(
                 () -> createResourceNotFoundException(resourceId)
         );
@@ -67,6 +68,11 @@ public class DefaultPrescriptionService extends BaseEntityService implements Pre
         super.prepareForUpdate(prescription);
         prescription.setId(id);
 
+        if (!employeeService.exists(dto.getAuthorResourceId())) {
+            throw new ResourceNotFoundException(
+                    "Author with id = " + dto.getAuthorResourceId() + " does not exist");
+        }
+
         prescription = prescriptionRepository.saveAndFlush(prescription);
         prescriptionRepository.refresh(prescription);
         return prescriptionMapper.toDto(prescription);
@@ -74,14 +80,14 @@ public class DefaultPrescriptionService extends BaseEntityService implements Pre
 
     @Transactional
     @Override
-    public void delete(String resourceId) {
+    public void delete(UUID resourceId) {
         Long id = prescriptionRepository.findIdByResourceId(resourceId).orElseThrow(
                 () -> createResourceNotFoundException(resourceId)
         );
         prescriptionRepository.deleteById(id);
     }
 
-    private ResourceNotFoundException createResourceNotFoundException(String resourceId) {
+    private ResourceNotFoundException createResourceNotFoundException(UUID resourceId) {
         return new ResourceNotFoundException("Prescription with id = " + resourceId + " does not exist");
     }
 }
