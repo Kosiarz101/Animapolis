@@ -33,7 +33,7 @@ services:
     depends_on:
       - kafka
     healthcheck:
-      test: [ "CMD", "curl", "-f", "http://localhost:8099/actuator/health/readiness" ]
+      test: [ "CMD", "wget", "-q", "--spider", "http://localhost:8099/actuator/health/readiness" ]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -41,6 +41,9 @@ services:
     extends:
       file: docker-compose.base.yml
       service: base_all
+    environment:
+      SPRING_CLOUD_CONFIG_SERVER_GIT_URI: "https://github.com/Kosiarz101/Animapolis.git"
+      SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:29092
 
   postgres:
     image: postgres:18.6-alpine3.24
@@ -65,6 +68,20 @@ services:
     extends:
       file: docker-compose.base.yml
       service: base_all
+    environment:
+      KAFKA_NODE_ID: 1
+      KAFKA_PROCESS_ROLES: broker,controller
+      KAFKA_LISTENERS: INTERNAL://0.0.0.0:29092,EXTERNAL://0.0.0.0:9092,CONTROLLER://localhost:9093
+      KAFKA_ADVERTISED_LISTENERS: INTERNAL://kafka:29092,EXTERNAL://localhost:9092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: 'INTERNAL:PLAINTEXT,EXTERNAL:PLAINTEXT,CONTROLLER:PLAINTEXT'
+      KAFKA_INTER_BROKER_LISTENER_NAME: 'INTERNAL'
+      KAFKA_CONTROLLER_LISTENER_NAMES: 'CONTROLLER'
+      KAFKA_CONTROLLER_QUORUM_VOTERS: 1@localhost:9093
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
+      KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
+
 networks:
   animapolis_network:
 volumes:

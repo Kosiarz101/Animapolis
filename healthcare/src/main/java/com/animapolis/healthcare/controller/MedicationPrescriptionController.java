@@ -27,7 +27,6 @@ public class MedicationPrescriptionController {
         return ResponseEntity
                 .status(201)
                 .body(createdMedicationPrescription);
-
     }
 
     @PutMapping("/{resourceId}")

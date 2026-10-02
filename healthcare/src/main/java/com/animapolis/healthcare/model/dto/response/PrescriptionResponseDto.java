@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Getter
 @Setter
@@ -17,5 +18,7 @@ public class PrescriptionResponseDto extends DtoResponseBase {
 
     private LocalDateTime authoredDate;
 
-    private String animalResourceId;
+    private UUID authorResourceId;
+
+    private UUID animalResourceId;
 }

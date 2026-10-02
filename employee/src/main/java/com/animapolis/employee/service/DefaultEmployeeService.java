@@ -28,7 +28,6 @@ public class DefaultEmployeeService extends BaseEntityService implements Employe
         super.prepareForCreation(employee);
         employeeRepository.save(employee);
         employeeRepository.refresh(employee);
-        employee = employeeRepository.findById(employee.getId()).get();
 
         return employeeMapper.toDto(employee);
     }
@@ -62,7 +61,6 @@ public class DefaultEmployeeService extends BaseEntityService implements Employe
 
         employee = employeeRepository.saveAndFlush(employee);
         employeeRepository.refresh(employee);
-        employee = employeeRepository.findById(id).get();
         return employeeMapper.toDto(employee);
     }
 
