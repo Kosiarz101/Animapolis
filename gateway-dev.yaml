@@ -8,3 +8,5 @@ management:
   endpoint:
     gateway:
       access: unrestricted
+    env:
+      show-values: ALWAYS
