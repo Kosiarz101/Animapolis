@@ -45,8 +45,8 @@ spring:
                 - StripPrefix=1
                 - name: RequestRateLimiter
                   args:
-                    rate-limiter: "#{@headerRateLimiter}"
-                    key-resolver: "#{@defaultKeyResolver}"
+                    rate-limiter: "#{@defaultRateLimiter}"
+                    key-resolver: "#{@headerKeyResolver}"
 
             # healthcare
             - id: healthcare-stripi-prefix
@@ -57,5 +57,5 @@ spring:
                 - StripPrefix=1
                 - name: RequestRateLimiter
                   args:
-                    rate-limiter: "#{@headerRateLimiter}"
-                    key-resolver: "#{@defaultKeyResolver}"
+                    rate-limiter: "#{@defaultRateLimiter}"
+                    key-resolver: "#{@headerKeyResolver}"
