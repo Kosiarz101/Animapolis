@@ -45,7 +45,7 @@ spring:
             - id: employee-strip-prefix
               uri: lb://EMPLOYEE
               predicates:
-                - Path=/employee/**
+                - Path=/employee/employment-contract/**
               filters:
                 - StripPrefix=1
             - id: healthcare-strip-prefix
