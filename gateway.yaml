@@ -42,9 +42,23 @@ spring:
                 - Path=/employee/**
               filters:
                 - StripPrefix=1
+                - name: RequestRateLimiter
+                  args:
+                    rate-limiter: "#{@defaultRateLimiter}"
+                    key-resolver: "#{@headerKeyResolver}"
             - id: healthcare-all
               uri: lb://HEALTHCARE
               predicates:
                 - Path=/healthcare/**
               filters:
                 - StripPrefix=1
+                - name: RequestRateLimiter
+                  args:
+                    rate-limiter: "#{@defaultRateLimiter}"
+                    key-resolver: "#{@headerKeyResolver}"
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      password: ${REDIS_PASSWORD}
+      timeout: 2000ms
