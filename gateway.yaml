@@ -36,21 +36,26 @@ spring:
       server:
         webflux:
           routes:
-            - id: employee-employee
+            # employee
+            - id: employee-strip-prefix
               uri: lb://EMPLOYEE
               predicates:
-                - Path=/employee/employee/**
+                - Path=/employee/**
               filters:
                 - StripPrefix=1
-            - id: employment-contract
-              uri: lb://EMPLOYEE
-              predicates:
-                - Path=/employee/employment-contract/**
-              filters:
-                - StripPrefix=1
-            - id: healthcare-prescription
+                - name: RequestRateLimiter
+                  args:
+                    rate-limiter: "#{@headerRateLimiter}"
+                    key-resolver: "#{@defaultKeyResolver}"
+
+            # healthcare
+            - id: healthcare-stripi-prefix
               uri: lb://HEALTHCARE
               predicates:
-                - Path=/healthcare/prescription/**
+                - Path=/healthcare/**
               filters:
                 - StripPrefix=1
+                - name: RequestRateLimiter
+                  args:
+                    rate-limiter: "#{@headerRateLimiter}"
+                    key-resolver: "#{@defaultKeyResolver}"
