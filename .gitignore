@@ -41,3 +41,4 @@ out/
 
 ### CUSTOM ###
 local/
+secrets.env
