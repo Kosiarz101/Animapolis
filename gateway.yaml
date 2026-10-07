@@ -48,10 +48,6 @@ spring:
                 - Path=/employee/**
               filters:
                 - StripPrefix=1
-                - name: RequestRateLimiter
-                  args:
-                    rate-limiter: "#{@defaultRateLimiter}"
-                    key-resolver: "#{@headerKeyResolver}"
             - id: healthcare-strip-prefix
               uri: lb://HEALTHCARE
               predicates:
