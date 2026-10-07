@@ -55,7 +55,7 @@ spring:
                     key-resolver: "#{@headerKeyResolver}"
 
             # healthcare
-            - id: healthcare-stripi-prefix
+            - id: healthcare-strip-prefix
               uri: lb://HEALTHCARE
               predicates:
                 - Path=/healthcare/**
