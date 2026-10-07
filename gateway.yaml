@@ -36,7 +36,7 @@ spring:
     redis:
       host: localhost
       port: 6379
-      password: secretpassword
+      password: ${REDIS_PASSWORD}
       timeout: 2000ms
     gateway:
       server:
