@@ -32,20 +32,14 @@ spring:
       kafka:
         binder:
           brokers: localhost:9092
-  data:
-    redis:
-      host: localhost
-      port: 6379
-      password: ${REDIS_PASSWORD}
-      timeout: 2000ms
     gateway:
       server:
         webflux:
           routes:
-            - id: employee-strip-prefix
+            - id: employee-employee
               uri: lb://EMPLOYEE
               predicates:
-                - Path=/employee/employment-contract/**
+                - Path=/employee/employee/**
               filters:
                 - StripPrefix=1
             - id: employment-contract
@@ -54,13 +48,9 @@ spring:
                 - Path=/employee/employment-contract/**
               filters:
                 - StripPrefix=1
-            - id: healthcare-strip-prefix
+            - id: healthcare-prescription
               uri: lb://HEALTHCARE
               predicates:
-                - Path=/healthcare/**
+                - Path=/healthcare/prescription/**
               filters:
                 - StripPrefix=1
-                - name: RequestRateLimiter
-                  args:
-                    rate-limiter: "#{@defaultRateLimiter}"
-                    key-resolver: "#{@headerKeyResolver}"
