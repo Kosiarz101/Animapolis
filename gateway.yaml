@@ -42,7 +42,6 @@ spring:
       server:
         webflux:
           routes:
-            # employee
             - id: employee-strip-prefix
               uri: lb://EMPLOYEE
               predicates:
@@ -53,8 +52,6 @@ spring:
                   args:
                     rate-limiter: "#{@defaultRateLimiter}"
                     key-resolver: "#{@headerKeyResolver}"
-
-            # healthcare
             - id: healthcare-strip-prefix
               uri: lb://HEALTHCARE
               predicates:
